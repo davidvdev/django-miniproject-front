@@ -15,13 +15,16 @@ const SingleMap = ({maps, match, deleteMap}) => {
         justifyContent: "space-evenly",
         margin: "0 15%"
     }
+    const wrap = {
+        overflowWrap: "break-word"
+    }
 
     return (
         <div style={style}>
             <Canvas map={map} size="400"/>
             <h2>Map #{map.id}</h2>
             <h3>Size: {map.rows} * {map.columns}</h3>
-            <h4>Layout: {map.layout}</h4>
+            <h4 style={wrap}>Layout: {map.layout}</h4>
             <div style={options}>
                 <Link to="/">
                     <button>Back</button>

@@ -64,10 +64,22 @@ function App(props) {
   // useEffects
   useEffect(()=> {getMaps()},[])
 
+  // styling
+  const h1 = {
+    fontFamily: "'Staatliches', cursive",
+    fontSize: "4rem",
+    color: "var(--dark-br)",
+    textShadow: "2px 4px 6px var(--green)"
+  }
+
+  const link = {
+    textDecoration: "none"
+  }
+
   return (
     <div className="App">
-      <Link to="/">
-        <h1>Mapapalooza</h1>
+      <Link to="/" style={link}>
+        <h1 style={h1}>Mapapalooza</h1>
       </Link>
       <Form 
         nullMap={nullMap}

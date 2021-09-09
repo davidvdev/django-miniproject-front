@@ -46,7 +46,7 @@ const AddDetails = ({maps, match, history, handleSubmit, deleteMap}) => {
                     value={formData.layout}
                     onChange={handleChange}
                 />
-                <input type="submit" value="save changes"/>
+                <input class="button" type="submit" value="save changes"/>
             </form>
             <div style={options}>
                 <Link to={`/map/${map.id}`}>

@@ -27,7 +27,7 @@ const Canvas = ({ map, size }) => {
                 currentRow = 0
             } 
             if (layout[i] === 1){
-                ctx.fillStyle = 'white'
+                ctx.fillStyle = '#dde5b6'
                 ctx.fillRect(x,y, oneRow, oneCol)
             }
             x += oneCol
@@ -40,7 +40,7 @@ const Canvas = ({ map, size }) => {
         ref={canvasRef}
         height={ch}
         width={cw}
-        style={{backgroundColor: "#d9ccb6", border: "3px solid #d9ccb6"}}
+        style={{backgroundColor: "#adc178", border: "3px solid #d9ccb6"}}
     />
     )
 }

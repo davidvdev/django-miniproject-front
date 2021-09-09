@@ -15,6 +15,7 @@ const Form = ({nullMap, handleSubmit}) => {
 
     return (
         <form onSubmit={handleSubmission}>
+            <label htmlFor="rows">Rows: </label>
             <input 
                 type="number"
                 min="1"
@@ -23,6 +24,8 @@ const Form = ({nullMap, handleSubmit}) => {
                 value={formData.rows}
                 onChange={handleChange}
             />
+            <br />
+            <label htmlFor="columns">Columns: </label>
             <input 
                 type="number"
                 min="1"
@@ -31,7 +34,8 @@ const Form = ({nullMap, handleSubmit}) => {
                 value={formData.columns}
                 onChange={handleChange}
             />
-            <input type="submit" name="submit" value="Generate Map"/>
+            <br />
+            <input class="button" type="submit" name="submit" value="Generate Map"/>
         </form>
     )
 }
