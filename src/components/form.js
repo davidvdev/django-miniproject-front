@@ -35,7 +35,7 @@ const Form = ({nullMap, handleSubmit}) => {
                 onChange={handleChange}
             />
             <br />
-            <input class="button" type="submit" name="submit" value="Generate Map"/>
+            <input className="button" type="submit" name="submit" value="Generate Map"/>
         </form>
     )
 }

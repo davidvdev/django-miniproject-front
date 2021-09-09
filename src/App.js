@@ -17,7 +17,6 @@ function App(props) {
   }
   // state
   const [maps, setMaps] = useState([])
-  const [selectedMap, setSelectedMap] = useState(nullMap)
 
   // functions
   const getMaps = async () => {

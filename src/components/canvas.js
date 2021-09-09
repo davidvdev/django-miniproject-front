@@ -11,7 +11,7 @@ const Canvas = ({ map, size }) => {
     // state/ref
     const canvasRef = useRef()
 
-    useEffect(()=>{{
+    useEffect(()=>{
         const canvas = canvasRef.current
         const ctx = canvas.getContext("2d") 
         let x = 0
@@ -33,7 +33,7 @@ const Canvas = ({ map, size }) => {
             x += oneCol
             currentRow++
         }
-    }},[map])
+    }, [map, ch, cw, columns, rows, layout])
 
     return (
     <canvas 

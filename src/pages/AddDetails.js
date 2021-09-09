@@ -15,7 +15,6 @@ const AddDetails = ({maps, match, history, handleSubmit, deleteMap}) => {
 
     const handleSubmission = (event) => {
         event.preventDefault()
-        console.log(formData)
         handleSubmit(formData)
         history.push(`/map/${map.id}`)
     }
@@ -46,7 +45,7 @@ const AddDetails = ({maps, match, history, handleSubmit, deleteMap}) => {
                     value={formData.layout}
                     onChange={handleChange}
                 />
-                <input class="button" type="submit" value="save changes"/>
+                <input className="button" type="submit" value="save changes"/>
             </form>
             <div style={options}>
                 <Link to={`/map/${map.id}`}>
