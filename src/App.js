@@ -1,23 +1,110 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react'
+import { Route, Switch, Link } from 'react-router-dom'
 import './App.css';
 
-function App() {
+import Maps from './pages/Maps';
+import SingleMap from './pages/SingleMap';
+import Form from './components/form';
+import AddDetails from './pages/AddDetails';
+
+function App(props) {
+  // global variables
+  const url = "https://django-miniproject-dv.herokuapp.com/maps/"
+  const nullMap = {
+    rows: 1,
+    columns: 1,
+    layout: []
+  }
+  // state
+  const [maps, setMaps] = useState([])
+  const [selectedMap, setSelectedMap] = useState(nullMap)
+
+  // functions
+  const getMaps = async () => {
+    const response = await fetch(url)
+    const data = await response.json()
+    setMaps(data)
+  }
+
+  const addMap = async (newMap) => {
+    // randomize layout array
+    for (let i = 0; i < (newMap.rows * newMap.columns); i++) {
+      newMap.layout.push(Math.round(Math.random()))
+    }
+    newMap.layout = await newMap.layout.join("")
+    await fetch(url, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newMap)
+    })
+    getMaps()
+  }
+
+  const updateMap = async (map) => {
+    await fetch(url + map.id + "/", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(map)
+    })
+    getMaps()
+  }
+
+  const deleteMap = async (map) => {
+    await fetch(url + map.id +"/",{
+      method: "delete"
+    })
+    props.history.push("/")
+    getMaps()
+  }
+
+  // useEffects
+  useEffect(()=> {getMaps()},[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Link to="/">
+        <h1>Mapapalooza</h1>
+      </Link>
+      <Form 
+        nullMap={nullMap}
+        handleSubmit={addMap}
+      />
+      <Switch>
+        <Route 
+          exact path="/"
+          render={(routerprops) => (
+            <Maps 
+              {...routerprops} 
+              maps={maps} 
+            />
+          )}
+        />
+        <Route 
+          path="/map/:id"
+          render={(routerprops) => (
+            <SingleMap 
+              {...routerprops} 
+              maps={maps}
+              deleteMap={deleteMap} 
+            />
+          )}
+        />
+        <Route 
+          path="/edit/:id"
+          render={(routerprops) => (
+            <AddDetails 
+              {...routerprops} 
+              maps={maps} 
+              handleSubmit={updateMap}
+              deleteMap={deleteMap} 
+            />
+          )}
+        />
+      </Switch>
     </div>
   );
 }
